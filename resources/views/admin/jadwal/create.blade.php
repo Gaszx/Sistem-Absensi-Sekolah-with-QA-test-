@@ -19,7 +19,7 @@
                     @endforeach
                 </select>
                 @error('classroom_id')
-                    <small style="color: #dc2626;">{{ $message }}</small>
+                    <small style="color: #26dc72;">{{ $message }}</small>
                 @enderror
             </div>
 

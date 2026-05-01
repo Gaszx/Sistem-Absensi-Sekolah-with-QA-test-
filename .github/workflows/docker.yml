@@ -1,0 +1,30 @@
+name: Build and Push Docker Image
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Mengambil kode dari repository Gitea kamu
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # 2. Login ke Docker Hub menggunakan Secret
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+
+      # 3. Build Docker image dan Push ke Docker Hub
+      - name: Build and Push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          # Ini akan menjadi nama image kamu di Docker Hub
+          # Contoh hasilnya nanti: username-kamu/aplikasi-absensi:latest
+          tags: ${{ secrets.DOCKER_USERNAME }}/aplikasi-absensi:latest

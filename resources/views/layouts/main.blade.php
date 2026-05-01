@@ -27,7 +27,7 @@
                 </div>
                 <div class="logo-text">
                     <h2>E-Absensi</h2>
-                    <span>Projek Kelompok 4</span>
+                    <span>Projek Absen by: 2306018</span>
                 </div>
             </div>
             

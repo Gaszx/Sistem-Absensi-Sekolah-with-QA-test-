@@ -1,4 +1,5 @@
 name: Build and Push Docker Image
+
 on:
   push:
     branches:
@@ -13,18 +14,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Login ke Docker Hub menggunakan Secret
+      # 2. Menyiapkan Docker Buildx (WAJIB DITAMBAHKAN)
+      # Ini dibutuhkan oleh build-push-action versi 4 ke atas
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      # 3. Login ke Docker Hub menggunakan Secret
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_TOKEN }}
 
-      # 3. Build Docker image dan Push ke Docker Hub
+      # 4. Build Docker image dan Push ke Docker Hub
       - name: Build and Push
         uses: docker/build-push-action@v5
         with:
           context: .
           push: true
-          # Ini akan menjadi nama image kamu di Docker Hub
           tags: ${{ secrets.DOCKER_USERNAME }}/aplikasi-absensi:latest

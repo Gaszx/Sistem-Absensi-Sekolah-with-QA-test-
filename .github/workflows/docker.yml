@@ -1,4 +1,5 @@
 name: Build and Push Docker Image
+on:
   push:
     branches:
       - main
@@ -8,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Mengambil kode dari repository Gitea kamu
+      # 1. Mengambil kode dari repository Gitea
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -26,5 +27,4 @@ jobs:
           context: .
           push: true
           # Ini akan menjadi nama image kamu di Docker Hub
-          # Contoh hasilnya nanti: username-kamu/aplikasi-absensi:latest
           tags: ${{ secrets.DOCKER_USERNAME }}/aplikasi-absensi:latest

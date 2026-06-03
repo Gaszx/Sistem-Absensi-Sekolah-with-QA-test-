@@ -1,0 +1,64 @@
+====================================================================
+DOKUMEN ABSENSI SEKOLAH: MASTER BLUEPRINT
+====================================================================
+
+A. STRUKTUR DIREKTORI (Relevan dengan Absensi)
+app/
+├── Http/
+│   ├── Controllers/
+│   │   ├── AuthController.php (Menangani Login, Cek Role Admin/Guru, & Logout)
+│   │   ├── GuruController.php (Menangani Dashboard Guru, Form Input Absen, Simpan Absen, & Rekap)
+│   │   └── AdminController.php dkk (Menangani CRUD Master Data oleh Admin)
+database/
+└── migrations/
+    ├── 0001_01_01_000000_create_users_table.php (Tabel Guru & Admin)
+    ├── 2026_01_01_000004_create_students_table.php (Tabel Siswa)
+    ├── 2026_01_01_000005_create_schedules_table.php (Tabel Jadwal Mengajar)
+    └── 2026_01_01_000006_create_attendances_table.php (Tabel Data Kehadiran)
+routes/
+└── web.php (Berisi Route Login, Middleware Role, & Route Guru/Admin)
+
+B. SKEMA DATABASE (Entity Relationship)
+Tabel: `users`
+- id (PK)
+- name (string)
+- email (string, unique)
+- password (string)
+- role (enum: 'admin', 'guru') -> Default 'guru'
+
+Tabel: `students`
+- id (PK)
+- name (string)
+- gender (enum: 'L', 'P')
+- classroom_id (FK ke tabel classrooms)
+
+Tabel: `schedules`
+- id (PK)
+- classroom_id (FK ke tabel classrooms)
+- subject_id (FK ke tabel subjects)
+- user_id (FK ke tabel users -> Guru yang mengajar)
+- day (string: Senin, Selasa, dst)
+- start_time (time)
+- end_time (time)
+
+Tabel: `attendances`
+- id (PK)
+- schedule_id (FK ke tabel schedules)
+- student_id (FK ke tabel students)
+- date (date)
+- status (enum: 'hadir', 'sakit', 'izin', 'alpha', nullable)
+- note (text, nullable)
+
+C. LOGIKA ALUR KERJA (Berdasarkan Kode Aktual)
+1. Alur Login: 
+   User memasukkan email dan password di route `/`. `AuthController` menggunakan `Auth::attempt`. Jika berhasil, sistem mengecek field `role`. Jika `admin`, redirect ke `/admin/dashboard`. Jika `guru`, redirect ke `/guru/dashboard`. Jika gagal, return back dengan pesan error.
+
+2. Alur Absensi (Guru): 
+   - Di Dashboard, Guru hanya melihat jadwal yang kolom `user_id`-nya sesuai dengan ID miliknya, dicocokkan dengan `day` hari ini, dan kelas terikat dengan `academic_year` aktif.
+   - Saat Guru memilih jadwal, sistem masuk ke `GuruController@create`. Terdapat validasi apakah jadwal tersebut benar milik Guru yang sedang login.
+   - Guru mengabsen siswa menggunakan pilihan status (Hadir/Sakit/Izin/Alpha).
+   - `GuruController@store` memproses absensi menggunakan fungsi `updateOrCreate` pada tabel `attendances` dengan key kombinasi (schedule_id, student_id, date). Sistem memperbolehkan update absen pada hari yang sama dengan menimpa record lama.
+
+3. Alur Geofencing / Validasi Koordinat:
+   - TIDAK ADA DI KODE. Source code merupakan aplikasi berbasis web (menggunakan Laravel Blade) murni tanpa logika GPS, tanpa integrasi peta, dan tanpa perhitungan/validasi jarak (Geofencing).
+====================================================================

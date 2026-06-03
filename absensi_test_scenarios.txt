@@ -1,0 +1,63 @@
+====================================================================
+DOKUMEN ABSENSI SEKOLAH: TEST SCENARIOS
+====================================================================
+
+1. MODUL AUTENTIKASI (Guru & Admin)
+--------------------------------------------------------------------
+- [AUTH-001] Login Admin Valid | Positif
+  * Kondisi: Input email admin dan password benar.
+  * Ekspektasi: Login sukses, diarahkan ke route `admin.dashboard`.
+
+- [AUTH-002] Login Guru Valid | Positif
+  * Kondisi: Input email guru dan password benar.
+  * Ekspektasi: Login sukses, diarahkan ke route `guru.dashboard`.
+
+- [AUTH-003] Login dengan Email/Password Salah | Negatif
+  * Kondisi: Input email atau password yang tidak valid.
+  * Ekspektasi: `Auth::attempt` menolak, kembali ke halaman login dengan validasi error "Email atau password salah."
+
+- [AUTH-004] Logout | Positif
+  * Kondisi: Klik tombol logout.
+  * Ekspektasi: Session di-invalidate, token regenerasi, diarahkan ke `/`.
+
+
+2. MODUL PENCATATAN KEHADIRAN (Oleh Guru)
+--------------------------------------------------------------------
+- [ATT-001] Tampil Jadwal Sesuai Hari Ini & Hak Akses | Positif
+  * Kondisi: Guru login dan mengakses dashboard.
+  * Ekspektasi: Hanya jadwal dengan `user_id` milik Guru tersebut dan `day` sama dengan hari ini (serta di Tahun Ajaran Aktif) yang dirender di view.
+
+- [ATT-002] Akses Jadwal Milik Guru Lain | Negatif
+  * Kondisi: Guru memodifikasi URL (misal: `/guru/absensi/999`) mencoba mengakses jadwal guru lain.
+  * Ekspektasi: `GuruController@create` melempar HTTP 403 Forbidden dengan pesan "Anda tidak berhak mengakses jadwal ini."
+
+- [ATT-003] Submit Absensi Sesuai Format | Positif
+  * Kondisi: Guru memilih status 'hadir', 'sakit', 'izin', atau 'alpha' untuk semua siswa dan menekan Submit.
+  * Ekspektasi: Data absensi berhasil disimpan dengan `updateOrCreate` dan diarahkan ke Dashboard dengan pesan sukses.
+
+- [ATT-004] Ubah Absensi di Hari yang Sama (Re-Submit) | Anomali (Diizinkan Sistem)
+  * Kondisi: Guru sudah absen kelas, lalu masuk lagi ke form absen jadwal tersebut di hari yang sama dan mengubah status siswa.
+  * Ekspektasi: Sistem tidak membuat record baru ganda, melainkan menimpa record lama (karena fungsi `updateOrCreate` berdasarkan date & schedule_id).
+
+- [ATT-005] Submit Absensi Tanpa Input Status (Validasi Form) | Negatif
+  * Kondisi: Request form dikirim namun payload array `attendances` kosong atau ada status siswa yang tidak sesuai format enum.
+  * Ekspektasi: Sistem (Laravel Validator) menolak request karena `attendances.*` mewajibkan nilai `in:hadir,sakit,izin,alpha`.
+
+
+3. MODUL GEOFENCING
+--------------------------------------------------------------------
+- [GEO-001] Pengujian Jarak / Lokasi 
+  * STATUS: TIDAK RELEVAN. 
+  * Alasan: Sesuai prinsip Zero-Hallucination, logika perhitungan jarak atau integrasi GPS sama sekali tidak eksis di source code project ini. Tidak ada skenario pengujian yang bisa dibuat.
+
+
+4. MODUL PENANGANAN EROR (Hanya yang Di-handle oleh Sistem)
+--------------------------------------------------------------------
+- [ERR-001] Percobaan Akses Route Guru oleh Admin | Negatif
+  * Kondisi: Admin mencoba mengakses URL `/guru/dashboard` via address bar.
+  * Ekspektasi: Middleware `role:guru` akan mencegat request dan menolak akses.
+
+- [ERR-002] Tahun Ajaran Aktif Tidak Ditemukan | Anomali
+  * Kondisi: Admin lupa mensetting Academic Year menjadi aktif. Guru masuk ke dashboard.
+  * Ekspektasi: Aplikasi tidak crash, array jadwal kosong, view merender informasi tanpa error sesuai handling di `GuruController@index` (baris `if(!$activeYear)`).
+====================================================================

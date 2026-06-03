@@ -23,6 +23,7 @@ class AdminAcademicYearController extends Controller
     // 3. SIMPAN DATA
     public function store(Request $request)
     {
+        \Log::info('STORE TAHUN AJARAN:', $request->all());
         $request->validate([
             'name' => 'required|string', // Contoh: 2025/2026
             'semester' => 'required|in:Ganjil,Genap',

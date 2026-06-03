@@ -4,6 +4,10 @@
 **Nama:** Bagas Sujiwo  
 **NIM:** 2306018  
 
+**Deploy Test:** [https://absensi-kelompok-4.onrender.com](https://absensi-kelompok-4.onrender.com)  
+**Username:** admin@sekolah.com  
+**Password:** password123  
+
 ## Executive Summary
 This document serves as the final execution report for the **End-to-End (E2E) Test Suite** of the Absensi Application. All test scenarios have been thoroughly executed using **Laravel Dusk** on an isolated SQLite database environment (`dusk.sqlite`) to prevent interference with production/local development data.
 

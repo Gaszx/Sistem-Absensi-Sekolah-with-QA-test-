@@ -34,9 +34,9 @@ This document serves as the final execution report for the **End-to-End (E2E) Te
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **AUTH-001** | Autentikasi: Login Admin (Positif) | Akun Admin valid | 1. Buka `/`<br>2. Isi data<br>3. Klik Login | Login sukses, ke admin.dashboard. | Admin keliru di-redirect ke halaman Guru | Diperbaiki logika if-else role di AuthController & RoleMiddleware | ✅ PASS |
 
-<div style="text-align: right; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
+<div style="text-align: left; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
 <div align="center">
-  <img src="tests/Browser/screenshots/E2E-001-Login-Admin.png" width="600">
+  <img src="tests/Browser/screenshots/E2E-001-Login-Admin.png" width="450">
 </div>
 
 <br>
@@ -45,9 +45,9 @@ This document serves as the final execution report for the **End-to-End (E2E) Te
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **AUTH-002** | Autentikasi: Login Guru (Positif) | Akun Guru valid | 1. Buka `/`<br>2. Isi data<br>3. Klik Login | Login sukses, ke guru.dashboard. | Sesuai Ekspektasi | Aman, tidak ada bug | ✅ PASS |
 
-<div style="text-align: right; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
+<div style="text-align: left; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
 <div align="center">
-  <img src="tests/Browser/screenshots/AUTH-002_Login_Guru.png" width="600">
+  <img src="tests/Browser/screenshots/AUTH-002_Login_Guru.png" width="450">
 </div>
 
 <br>
@@ -56,9 +56,9 @@ This document serves as the final execution report for the **End-to-End (E2E) Te
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **AUTH-003** | Autentikasi: Login Salah (Negatif) | Kredensial salah/tidak valid | 1. Buka `/`<br>2. Isi data salah<br>3. Klik Login | Ditolak, kembali ke `/` dgn pesan error. | Pesan error kredensial tidak muncul di UI | Diperbaiki form request dan flash message untuk error login di Controller | ✅ PASS |
 
-<div style="text-align: right; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
+<div style="text-align: left; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
 <div align="center">
-  <img src="tests/Browser/screenshots/AUTH-003_Login_Salah.png" width="600">
+  <img src="tests/Browser/screenshots/AUTH-003_Login_Salah.png" width="450">
 </div>
 
 <br>
@@ -67,9 +67,9 @@ This document serves as the final execution report for the **End-to-End (E2E) Te
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **AUTH-004** | Autentikasi: Logout (Positif) | User sedang login | 1. Buka menu profil<br>2. Klik Logout | Session mati, kembali ke `/`. | Error 404 Not Found saat klik logout | Dibuatkan rute POST logout di web.php & AuthController | ✅ PASS |
 
-<div style="text-align: right; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
+<div style="text-align: left; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
 <div align="center">
-  <img src="tests/Browser/screenshots/AUTH-004_Logout.png" width="600">
+  <img src="tests/Browser/screenshots/AUTH-004_Logout.png" width="450">
 </div>
 
 <br>
@@ -78,9 +78,9 @@ This document serves as the final execution report for the **End-to-End (E2E) Te
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **E2E-001** | Master Data: Create Mapel | Login sebagai Admin, ada di dashboard | 1. Buka `/admin/mapel/create`<br>2. Input nama mapel<br>3. Simpan | Data tersimpan, redirect ke list mapel | Sesuai Ekspektasi | Aman, tidak ada bug | ✅ PASS |
 
-<div style="text-align: right; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
+<div style="text-align: left; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
 <div align="center">
-  <img src="tests/Browser/screenshots/E2E-002-Create-Mapel.png" width="600">
+  <img src="tests/Browser/screenshots/E2E-002-Create-Mapel.png" width="450">
 </div>
 
 <br>
@@ -89,9 +89,9 @@ This document serves as the final execution report for the **End-to-End (E2E) Te
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **E2E-002** | Master Data: Create Akun Guru | Login sebagai Admin, mapel sudah ada | 1. Buka `/admin/guru/create`<br>2. Input data<br>3. Simpan | Data tersimpan, redirect ke list guru | Sesuai Ekspektasi | Aman, tidak ada bug | ✅ PASS |
 
-<div style="text-align: right; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
+<div style="text-align: left; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
 <div align="center">
-  <img src="tests/Browser/screenshots/E2E-003-Create-Guru.png" width="600">
+  <img src="tests/Browser/screenshots/E2E-003-Create-Guru.png" width="450">
 </div>
 
 <br>
@@ -100,9 +100,9 @@ This document serves as the final execution report for the **End-to-End (E2E) Te
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **E2E-003** | Master Data: Create Tahun Ajaran | Login sebagai Admin | 1. Buka `/admin/tahun-ajaran/create`<br>2. Input data<br>3. Simpan | Data tersimpan & menjadi tahun aktif | Gagal submit, tersangkut di form create karena validasi HTML5 memblokir submit | Diatasi dengan inject JS `$browser->script()` | ✅ PASS |
 
-<div style="text-align: right; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
+<div style="text-align: left; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
 <div align="center">
-  <img src="tests/Browser/screenshots/E2E-004-Create-Tahun-Ajaran.png" width="600">
+  <img src="tests/Browser/screenshots/E2E-004-Create-Tahun-Ajaran.png" width="450">
 </div>
 
 <br>
@@ -111,9 +111,9 @@ This document serves as the final execution report for the **End-to-End (E2E) Te
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **E2E-004** | Master Data: Create Kelas | Login Admin, Tahun Ajaran sudah dibuat | 1. Buka `/admin/kelas/create`<br>2. Input data<br>3. Simpan | Data tersimpan, redirect ke list kelas | Gagal submit, tersangkut di form create | Diatasi dengan inject JS `$browser->script()` | ✅ PASS |
 
-<div style="text-align: right; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
+<div style="text-align: left; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
 <div align="center">
-  <img src="tests/Browser/screenshots/E2E-005-Create-Kelas.png" width="600">
+  <img src="tests/Browser/screenshots/E2E-005-Create-Kelas.png" width="450">
 </div>
 
 <br>
@@ -122,9 +122,9 @@ This document serves as the final execution report for the **End-to-End (E2E) Te
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **E2E-005** | Master Data: Create Siswa | Login Admin, Kelas sudah dibuat | 1. Buka `/admin/siswa/create`<br>2. Input data<br>3. Simpan | Data tersimpan, redirect ke list siswa | Gagal submit, tersangkut di form create | Diatasi dengan inject JS `$browser->script()` | ✅ PASS |
 
-<div style="text-align: right; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
+<div style="text-align: left; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
 <div align="center">
-  <img src="tests/Browser/screenshots/E2E-006-Create-Siswa.png" width="600">
+  <img src="tests/Browser/screenshots/E2E-006-Create-Siswa.png" width="450">
 </div>
 
 <br>
@@ -133,9 +133,9 @@ This document serves as the final execution report for the **End-to-End (E2E) Te
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **E2E-006** | Master Data: Create Jadwal | Mapel, Guru, Kelas, dan Tahun Ajaran siap | 1. Buka `/admin/jadwal/create`<br>2. Input data<br>3. Simpan | Data tersimpan, redirect ke list jadwal | Gagal submit, tersangkut di form create | Diatasi dengan inject JS `$browser->script()` | ✅ PASS |
 
-<div style="text-align: right; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
+<div style="text-align: left; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
 <div align="center">
-  <img src="tests/Browser/screenshots/E2E-007-Create-Jadwal.png" width="600">
+  <img src="tests/Browser/screenshots/E2E-007-Create-Jadwal.png" width="450">
 </div>
 
 <br>
@@ -144,9 +144,9 @@ This document serves as the final execution report for the **End-to-End (E2E) Te
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **E2E-007** | Master Data: Akses Rekap Admin | Ada data siswa & absen | 1. Buka menu Rekap Absensi<br>2. Cek konten | Menampilkan tabel rekap absensi | Teks assertion gagal ("Rekap Laporan Absensi" tidak ditemukan) | Diperbaiki teks assertion menjadi "Rekap Absensi" | ✅ PASS |
 
-<div style="text-align: right; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
+<div style="text-align: left; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
 <div align="center">
-  <img src="tests/Browser/screenshots/E2E-008-Rekap-Admin.png" width="600">
+  <img src="tests/Browser/screenshots/E2E-008-Rekap-Admin.png" width="450">
 </div>
 
 <br>
@@ -155,9 +155,9 @@ This document serves as the final execution report for the **End-to-End (E2E) Te
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **ATT-001** | Kehadiran: Tampil Jadwal Sesuai (Positif) | Login Guru, jadwal hari ini ada | 1. Login sbg Guru<br>2. Buka dashboard | Hanya jadwal Guru tsb & hari ini yg tampil. | Sesuai Ekspektasi | Aman, tidak ada bug | ✅ PASS |
 
-<div style="text-align: right; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
+<div style="text-align: left; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
 <div align="center">
-  <img src="tests/Browser/screenshots/ATT-001_Tampil_Jadwal.png" width="600">
+  <img src="tests/Browser/screenshots/ATT-001_Tampil_Jadwal.png" width="450">
 </div>
 
 <br>
@@ -166,9 +166,9 @@ This document serves as the final execution report for the **End-to-End (E2E) Te
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **ATT-002** | Kehadiran: Akses Jadwal Lain (Negatif) | Login Guru A, tau ID jadwal Guru B | 1. Buka `/guru/absensi/{id_guru_B}` | Muncul error HTTP 403 Forbidden. | Sesuai Ekspektasi | Aman, tidak ada bug | ✅ PASS |
 
-<div style="text-align: right; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
+<div style="text-align: left; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
 <div align="center">
-  <img src="tests/Browser/screenshots/ATT-002_Akses_Jadwal_Lain.png" width="600">
+  <img src="tests/Browser/screenshots/ATT-002_Akses_Jadwal_Lain.png" width="450">
 </div>
 
 <br>
@@ -177,9 +177,9 @@ This document serves as the final execution report for the **End-to-End (E2E) Te
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **ATT-003** | Kehadiran: Submit Absensi Format (Positif) | Login Guru, buka form absen | 1. Pilih status<br>2. Simpan | Data tersimpan, muncul pesan sukses. | ElementNotInteractableException saat klik radio button (ke-hidden CSS) | Diatasi dengan inject JS `$browser->script()` | ✅ PASS |
 
-<div style="text-align: right; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
+<div style="text-align: left; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
 <div align="center">
-  <img src="tests/Browser/screenshots/ATT-003_Submit_Absensi_Format.png" width="600">
+  <img src="tests/Browser/screenshots/ATT-003_Submit_Absensi_Format.png" width="450">
 </div>
 
 <br>
@@ -188,9 +188,9 @@ This document serves as the final execution report for the **End-to-End (E2E) Te
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **ATT-004** | Kehadiran: Ubah Absensi Sama (Anomali) | Sudah absen kelas tsb hari ini | 1. Buka form kelas<br>2. Ubah status<br>3. Simpan | Sukses, record lama ditimpa (update). | ElementNotInteractableException saat klik radio button (ke-hidden CSS) | Diatasi dengan inject JS `$browser->script()` | ✅ PASS |
 
-<div style="text-align: right; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
+<div style="text-align: left; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
 <div align="center">
-  <img src="tests/Browser/screenshots/ATT-004_Ubah_Absensi_Sama.png" width="600">
+  <img src="tests/Browser/screenshots/ATT-004_Ubah_Absensi_Sama.png" width="450">
 </div>
 
 <br>
@@ -199,9 +199,9 @@ This document serves as the final execution report for the **End-to-End (E2E) Te
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **ATT-005** | Kehadiran: Submit Absen Kosong (Negatif) | Login Guru, buka form absen | 1. Kosongkan nilai status<br>2. Simpan | Ditolak Validator, muncul pesan error. | Sesuai Ekspektasi | Aman, tidak ada bug | ✅ PASS |
 
-<div style="text-align: right; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
+<div style="text-align: left; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
 <div align="center">
-  <img src="tests/Browser/screenshots/ATT-005_Submit_Absen_Kosong.png" width="600">
+  <img src="tests/Browser/screenshots/ATT-005_Submit_Absen_Kosong.png" width="450">
 </div>
 
 <br>
@@ -210,9 +210,9 @@ This document serves as the final execution report for the **End-to-End (E2E) Te
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **ERR-001** | Eror: Akses Route Guru oleh Admin (Negatif) | Login Admin, session aktif | 1. Buka manual `/guru/dashboard` | Dicegat middleware, akses ditolak (403). | Dapat diakses tanpa batasan role | Diperbaiki dengan penerapan RoleMiddleware di Controller/Route | ✅ PASS |
 
-<div style="text-align: right; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
+<div style="text-align: left; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
 <div align="center">
-  <img src="tests/Browser/screenshots/ERR-001_Admin_Akses_Guru.png" width="600">
+  <img src="tests/Browser/screenshots/ERR-001_Admin_Akses_Guru.png" width="450">
 </div>
 
 <br>
@@ -221,9 +221,9 @@ This document serves as the final execution report for the **End-to-End (E2E) Te
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **ERR-002** | Eror: Tahun Ajaran Tak Ditemukan (Anomali) | Tabel `academic_years` tidak ada aktif | 1. Login Guru<br>2. Buka dashboard | View tetap jalan, list jadwal kosong. | Sesuai Ekspektasi | Aman, tidak ada bug | ✅ PASS |
 
-<div style="text-align: right; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
+<div style="text-align: left; font-weight: bold; margin-bottom: 5px; color: #555;">Evidence :</div>
 <div align="center">
-  <img src="tests/Browser/screenshots/ERR-002_Tahun_Ajaran_Tak_Ditemukan.png" width="600">
+  <img src="tests/Browser/screenshots/ERR-002_Tahun_Ajaran_Tak_Ditemukan.png" width="450">
 </div>
 
 ---
